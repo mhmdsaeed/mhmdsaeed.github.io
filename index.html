@@ -1,47 +1,20 @@
 <!DOCTYPE html>
-
-<html>
-
-<head>
-	<title>
-		Al Sayed Sulaiman Family Tree
-	</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	
-	<script src=
-          "https://code.jquery.com/jquery-1.12.4.min.js">
-	</script>
-	
-	<style>
-	* {
-  padding: 0;
-  margin: 0;
-  outline: 0;
-  overflow: hidden;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-#zoom {
-  width: 100%;
-  height: 100%;
-  transform-origin: 0px 0px;
-  transform: scale(1) translate(0px, 0px);
-  cursor: grab;
-}
-div#zoom > img {
-  width: 100%;
-  height: auto;
-}
-	</style>
-	
-	<script>
-	var scale = 1,
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Al Sayed Sulaiman Framily Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="zoom_outer">
+      <div id="zoom">
+        <img src="SSFamily_Tree.png" alt="zoom">
+      </div>
+    </div>
+    <script>
+      var scale = 1,
         panning = false,
         pointX = 0,
         pointY = 0,
@@ -83,16 +56,6 @@ div#zoom > img {
 
         setTransform();
       }
-	</script>	
-	
-</head
-
-
-<body>
-    <div class="zoom_outer">
-      <div id="zoom">
-        <img src="SSFamily_Tree.png" alt="family tree">
-      </div>
-</body>
-
-</html>		
+    </script>
+  </body>
+  </html>
