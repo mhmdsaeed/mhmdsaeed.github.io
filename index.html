@@ -4,55 +4,95 @@
 
 <head>
 	<title>
-		How to zoom-in and zoom-out
-		image using JavaScript ?
+		Al Sayed Sulaiman Family Tree
 	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	
 	<script src=
-"https://code.jquery.com/jquery-1.12.4.min.js">
+          "https://code.jquery.com/jquery-1.12.4.min.js">
 	</script>
-</head>
+	
+	<style>
+	* {
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  overflow: hidden;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#zoom {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0px 0px;
+  transform: scale(1) translate(0px, 0px);
+  cursor: grab;
+}
+div#zoom > img {
+  width: 100%;
+  height: auto;
+}
+	</style>
+	
+	<script>
+	var scale = 1,
+        panning = false,
+        pointX = 0,
+        pointY = 0,
+        start = { x: 0, y: 0 },
+        zoom = document.getElementById("zoom");
 
-<body style="text-align:center;">
+      function setTransform() {
+        zoom.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
+      }
+
+      zoom.onmousedown = function (e) {
+        e.preventDefault();
+        start = { x: e.clientX - pointX, y: e.clientY - pointY };
+        panning = true;
+      }
+
+      zoom.onmouseup = function (e) {
+        panning = false;
+      }
+
+      zoom.onmousemove = function (e) {
+        e.preventDefault();
+        if (!panning) {
+          return;
+        }
+        pointX = (e.clientX - start.x);
+        pointY = (e.clientY - start.y);
+        setTransform();
+      }
+
+      zoom.onwheel = function (e) {
+        e.preventDefault();
+        var xs = (e.clientX - pointX) / scale,
+          ys = (e.clientY - pointY) / scale,
+          delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY);
+        (delta > 0) ? (scale *= 1.2) : (scale /= 1.2);
+        pointX = e.clientX - xs * scale;
+        pointY = e.clientY - ys * scale;
+
+        setTransform();
+      }
+	</script>	
 	
-	<h1 style = "color:green;" >
-		GeeksForGeeks
-	</h1>
-	
-	<h3>
-		JavaScript | Increase and
-		Decrease image size
-	</h3>
-	<hr>
-	
-	<div class="box">
-		
-		<img src="SSFamily_Tree.png"
-			id="geeks" GFG="250" alt="Geeksforgeeks">
-	</div>
-	<hr>
-	
-	<button type="button" onclick="zoomin()">
-		Zoom-In
-	</button>
-	
-	<button type="button" onclick="zoomout()">
-		Zoom-Out
-	</button>
-	
-	<script type="text/javascript">
-		function zoomin() {
-			var GFG = document.getElementById("geeks");
-			var currWidth = GFG.clientWidth;
-			GFG.style.width = (currWidth + 100) + "px";
-		}
-		
-		function zoomout() {
-			var GFG = document.getElementById("geeks");
-			var currWidth = GFG.clientWidth;
-			GFG.style.width = (currWidth - 100) + "px";
-		}
-	</script>
+</head
+
+
+<body>
+    <div class="zoom_outer">
+      <div id="zoom">
+        <img src="SSFamily_Tree.png" alt="family tree">
+      </div>
 </body>
 
 </html>		
